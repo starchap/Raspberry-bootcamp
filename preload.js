@@ -13,6 +13,9 @@ contextBridge.exposeInMainWorld('electron', {
     },
     writeFile: async (filePath, content) => {
       return await ipcRenderer.send('writeFile', filePath, content);
+    },
+    fileExist: async (filePath) => {
+      return await ipcRenderer.send('fileExist', filePath);
     }
   }
 })

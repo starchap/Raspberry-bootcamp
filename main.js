@@ -30,12 +30,19 @@ if (isDev) {
 ipcMain.on('notify', (_, message) => {
   new Notification({title: 'Notifiation', body: message}).show();
 })
+
+
+// filesApi
 ipcMain.handle('readFile', async (_, filePath) => {
   return await fs.readFileSync(filePath, 'utf-8');
 })
 
 ipcMain.on('writeFile', async (_, filePath, content) => {
   await fs.writeFileSync(filePath, content, 'utf-8');
+})
+
+ipcMain.handle('fileExist', async (_, filePath) => {
+  return await fs.existsSync(filePath);
 })
 
 app.whenReady().then(createWindow)
